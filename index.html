@@ -2,41 +2,104 @@
 <html>
 <head>
 	<title>Psychic</title>
+  <style type="text/css" src=assets/javascipt/javascript.js style="css"></style>
+  <style type="text/javascript"></style>
+  <!-- <script src="javascript.js"></script> -->
+
 </head>
 <body>
+<h1>The Psychic Game</h1>
+<p>Guess What Letter I am thinking of?<div id="myGuess"></div></p>
+<p><div id="myWins"></div>Games Won</p>
+<p><div id="myLoses"></div>Games Lost</p>
+<p><div id="totalGuesses">You are on Game # </div></p>
+<p><div id="myGuessesLeft"></div>Guesses so far</p>
+<!-- end of divs  -->
+
+<script type="text/javascript">
+// alert("Let's get Started");
+
+var win=0;
+var lose=0;
+var game=9;
+
+
+for (var i = 4; i > 0; i--){
+
+  function random_character() {
+    var chars = "abcdefghijklmnopqurstuvwxyz";
+    return chars.substr( Math.floor(Math.random() * 24), 1);
+  }
+
+
+var game1=i
+console.log("you are on game  " + game);
+    // Generate a Random #
+
+  var rchar = random_character();
+    alert("the computer random character is " + rchar);
+     
+  // pick your character
+  var userGuess=prompt("Enter your guess");
+  console.log(userGuess);
+
+  if (userGuess==rchar){
+    console.log("you win");
+      var win=win+1;
+        console.log("wins =  " + win);}
+    else {console.log("you lose")
+      var lose=lose+1;
+        console.log("losses = " + lose);
+        
+game=game-1;
+
+
+var targetDiv = document.getElementById("myWins");
+targetDiv.innerHTML = win;
+
+var targetDiv1 = document.getElementById("myLoses");
+   targetDiv1.innerHTML = lose;
+
+   var targetDiv2 = document.getElementById("myGuessesLeft");
+   targetDiv2.innerHTML = game;
+
+var targetDiv4 = document.getElementById("myGuess");
+   targetDiv4.innerHTML = rchar;
+
+// console.log(game1)
+   var targetDiv3 = document.getElementById("totalGuesses");
+   targetDiv3.innerHTML = game1;
+  }}
+
+</script>
 
 </body>
+
 </html>
-# JavaScript Assignment
 
-### Overview
-
-In this assignment, you'll create one of two possible computer games: Hangman or Psychic. These apps will run in the browser, and feature dynamically updated HTML powered by your JavaScript code.
-
-### Before You Begin
-
-1. Create a new GitHub repo called `Hangman-Game` or `Psychic-Game`, in accordance with the assignment you choose to complete. Then, clone it to your computer.
-
-2. Inside your local git repository, create an `index.html`.
-
-3. While still in your local git repo, create a directory called `assets`.
-4. `cd` your way into the `assets` folder, then make three additional folders: `javascript`, `css` and `images`.
-
-   * In the `javascript` folder, make a file called `game.js`. Use the `src` attribute of the `script` tag to link to this file, rather than embedding the code directly in your HTML document.
-   * In the `css` folder, make a file called `style.css`.
-   * Also in the `css` folder, make a file called `reset.css`. Paste into it the code from the Meyerweb reset stylesheet. If you opt to use Bootstrap instead of writing your own CSS, skip this step, and simply include a link to Bootstrap via CDN.
-   * In the `images` folder, save whatever images you plan on using.
-
-5. Push the above changes to GitHub.
-
-6. Choose whichever game you'd like to build. Making the Psychic game will prove less challenging than coding Hangman. However, as the challenge of the Hangman exercise provides a more comprehensive review of this week's material, we suggest attempting that assignment first.
-
-7. Note: There's no shame if you'd prefer submitting Psychic—it's still a proper challenge.
-
-8. Push your selected game to Github Pages.
+<!-- pseudo code -->
 
 
-## Option One: Psychic Game (Basic)
+<!-- set game count maybe for loop for game using variable gameCount
+
+for loop - set game =9
+computer picks random letter
+use java to get a random letter and store in variable compLetter
+user picks letter 
+get key entry letter and set as variable userLetter
+See if they are equal in if statement and add win or loss
+record win or loss
+
+go to next game
+reset variables
+start new game
+game count decrease with by one
+end game -->
+
+
+
+
+<!-- ## Option One: Psychic Game (Basic)
 
 ![Psychic](Images/1-Psychic.jpg)
 
@@ -142,3 +205,4 @@ If you have any questions about this project or the material we have covered, pl
 ### Copyright
 
 Coding Boot Camp © 2016. All Rights Reserved.
+ --> 
