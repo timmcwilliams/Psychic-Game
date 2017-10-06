@@ -3,206 +3,95 @@
 <head>
 	<title>Psychic</title>
   <style type="text/css" src=assets/javascipt/javascript.js style="css"></style>
-  <style type="text/javascript"></style>
-  <!-- <script src="javascript.js"></script> -->
+  <style type="/javascript"></style>
+
 
 </head>
 <body>
 <h1>The Psychic Game</h1>
-<p>Guess What Letter I am thinking of?<div id="myGuess"></div></p>
-<p><div id="myWins"></div>Games Won</p>
-<p><div id="myLoses"></div>Games Lost</p>
-<p><div id="totalGuesses">You are on Game # </div></p>
-<p><div id="myGuessesLeft"></div>Guesses so far</p>
-<!-- end of divs  -->
+
+<div id="guessgame">
+<p>Guess What Letter I am Thinking Of (no Caps please!)</p>
+</div>
+
+<div id="myGuess">
+<p>You Guessed</p>
+</div>
+
+<!-- <p><div id="myGuess"></div>My Guess</p> -->
+
+
+<!-- code -->
 
 <script type="text/javascript">
-// alert("Let's get Started");
 
-var win=0;
-var lose=0;
-var game=9;
-
-
-for (var i = 4; i > 0; i--){
-
-  function random_character() {
-    var chars = "abcdefghijklmnopqurstuvwxyz";
-    return chars.substr( Math.floor(Math.random() * 24), 1);
-  }
+var options = ["a", "b", "c", "d", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]; 
+var wins= 0;
+var losses= 0;
+var turns= 9;
+var guess="";
 
 
-var game1=i
-console.log("you are on game  " + game);
-    // Generate a Random #
 
-  var rchar = random_character();
-    alert("the computer random character is " + rchar);
-     
-  // pick your character
-  var userGuess=prompt("Enter your guess");
-  console.log(userGuess);
+var computerGuess;
+// var intialized=true;
+document.onkeyup = function(event) {
 
-  if (userGuess==rchar){
-    console.log("you win");
-      var win=win+1;
-        console.log("wins =  " + win);}
-    else {console.log("you lose")
-      var lose=lose+1;
-        console.log("losses = " + lose);
-        
-game=game-1;
+{
+computerGuess = options[Math.floor(Math.random()*options.length)];
+
+alert("Computer Guess Was: " + computerGuess);
+}
+
+var userguess = event.key;
+if (userguess == computerGuess) {
+computerGuess = options[Math.floor(Math.random()*options.length)];
+  // intialized=true;
+  wins++;
+  turns = 9; 
+  guess = ""; 
+}
+
+else if(userguess !== computerGuess) {
+ turns--;
+ guess += userguess + ", ";}
 
 
-var targetDiv = document.getElementById("myWins");
-targetDiv.innerHTML = win;
+  if (turns ==0) {
+    losses++;
+    turns= 9;
+    guess="";
+}
 
-var targetDiv1 = document.getElementById("myLoses");
-   targetDiv1.innerHTML = lose;
 
-   var targetDiv2 = document.getElementById("myGuessesLeft");
-   targetDiv2.innerHTML = game;
+var html = "<p>Guess what letter I'm thinking of</p>" + 
+  "<p>wins: " + wins + "</p>" +
+  "<p>losses: " + losses + "</p>" +
+  "<p>turns: " + turns + "</p>"+
+  "<p>Your Guess So Far: " + guess + "</p>";
+  // "<p>Press Your Guess to Continue: " + null + "</p>";
 
+document.querySelector('#guessgame').innerHTML = html;
+
+var userGuess=guess;
 var targetDiv4 = document.getElementById("myGuess");
-   targetDiv4.innerHTML = rchar;
+   targetDiv4.innerHTML=userGuess;
 
-// console.log(game1)
-   var targetDiv3 = document.getElementById("totalGuesses");
-   targetDiv3.innerHTML = game1;
-  }}
+}
+
+//   function random_character() {
+//     var rchars = "abcdefghijklmnopqurstuvwxyz";
+//     return rchars.substr(Math.floor(Math.random() * 27), 1);
+//      // var rchar = random_character();
+//     console.log(rchars);
+  // }}
+  //
+
+  // var rchar = random_character();
+
 
 </script>
 
 </body>
 
 </html>
-
-<!-- pseudo code -->
-
-
-<!-- set game count maybe for loop for game using variable gameCount
-
-for loop - set game =9
-computer picks random letter
-use java to get a random letter and store in variable compLetter
-user picks letter 
-get key entry letter and set as variable userLetter
-See if they are equal in if statement and add win or loss
-record win or loss
-
-go to next game
-reset variables
-start new game
-game count decrease with by one
-end game -->
-
-
-
-
-<!-- ## Option One: Psychic Game (Basic)
-
-![Psychic](Images/1-Psychic.jpg)
-
-1. [Watch the demo](psychic-game-demo.mov).
-
-2. You're going to make a game just like the one in the video. Essentially, the app randomly picks a letter, and the user has to guess which letter the app chose. Put the following text on your page:
-
-3. Guess what letter I'm thinking of
-
-4. Wins: (# of times the user has guessed the letter correctly)
-
-5. Losses: (# of times the user has failed to guess the letter correctly after exhausting all guesses)
-
-6. Guesses Left: (# of guesses left. This will update)
-
-7. Your Guesses So Far: (the specific letters that the user typed. Display these until the user either wins or loses.)
-
-8. When the player wins, increase the Wins counter and start the game over again (without refreshing the page).
-
-9. When the player loses, increase the Losses counter and restart the game without a page refresh (just like when the user wins).
-
-## Option Two: Hangman Game (Challenge - Recommended)
-
-![Hangman](Images/2-Hangman.jpg)
-
-1. [Watch the demo](hangman-game-demo.mov).
-
-2. Choose a theme for your game! In the demo, we picked an 80s theme: 80s questions, 80s sound and an 80s aesthetic. You can choose any subject for your theme, though, so be creative!
-
-3. Use key events to listen for the letters that your players will type.
-
-4. Display the following on the page:
-
-5. Press any key to get started!
-
-6. Wins: (# of times user guessed the word correctly).
-
-   * If the word is `madonna`, display it like this when the game starts: `_ _ _ _ _ _ _`.
-
-   * As the user guesses the correct letters, reveal them: `m a d o _  _ a`.
-
-7. Number of Guesses Remaining: (# of guesses remaining for the user).
-
-8. Letters Already Guessed: (Letters the user has guessed, displayed like `L Z Y H`).
-
-9. After the user wins/loses the game should automatically choose another word and make the user play it.
-
-##### Hangman Game Bonuses
-
-1. Play a sound or song when the user guesses their word correctly, like in our demo.
-2. Write some stylish CSS rules to make a design that fits your game's theme.
-3. **HARD MODE:** Organize your game code as an object, except for the key events to get the letter guessed. This will be a challenge if you haven't coded with JavaScript before, but we encourage anyone already familiar with the language to try this out.
-4. Save your whole game and its properties in an object.
-5. Save any of your game's functions as methods, and call them underneath your object declaration using event listeners.
-6. Don't forget to place your global variables and functions above your object.
-   * Remember: global variables, then objects, then calls.
-7. Definitely talk with a TA or your instructor if you get tripped up during this challenge.
-
-- - -
-
-#### A Few Tips
-
-1. **IMPORTANT:** Whichever assignment you choose, code your game one piece at a time! Code all of your apps one piece at a time. _Always code one piece at a time!_
-2. Pseudocode your program and break the app down into tiny, manageable fragments. This will make the coding process much less frustrating and a veritable Mach number faster. Otherwise, you'll be chipping away at a giant chunk of abstraction for way too many hours.
-
-   * The ability to solve a large problem by treating it as a set of smaller ones is the hallmark of a strong programmer. Best start adapting this into your development routine now, to better prepare for your more complex future projects.
-   * Remember:
-     1. Split the whole program into many distinct, pseudocoded problems.
-     2. Focus on one of the smaller problems and solve it.
-     3. Only when you solve one problem should you then move onto your next problem.
-
-3. When you encounter bugs (and we all do), `console.log` will become your best friend. Regularly check your console to make sure your app is spitting out the right values.
-
-   * As a more advanced—but more powerful—alternative, feel free to experiment with the [Chrome DevTools Debugger](https://developers.google.com/web/tools/chrome-devtools/).
-
-4. Try your best to deliver a 'working/playable game' by the end of the deadline. If you're not making progress with Hangman, switch gears to the Psychic game. Contact your TA/Instructor if you're not making progress after 2 hours. We're here to help!
-
-5. Substance over style! Submitting a working game matters more that making a broken app that at least looks pretty. We're focusing on game mechanics, not just on the look and feel of your app.
-6. That said, coding a functional app that also looks pretty would be impressive.
-
-7. Always commit your work and back it up with GitHub pushes. You don't want to lose hours of your work because you didn't push it to GitHub every half hour or so.
-
-   * **Commit often**.
-
-8. Turn in anything you have! Even if you don't finish, we still want to see what you were able to accomplish in the time we gave you. This will help us know what concepts we could help you with, as well as what topics we should focus on in the coming lectures.
-
-- - -
-
-### Minimum Requirements
-
-Attempt to complete homework assignment as described in instructions. If unable to complete certain portions, please pseudocode these portions to describe what remains to be completed.
-
-- - -
-
-### One More Thing
-
-If you have any questions about this project or the material we have covered, please post them in the community channels in slack so that your fellow developers can help you! If you're still having trouble, you can come to office hours for assistance from your instructor and TAs.
-
-**Good Luck!**
-
-- - -
-
-### Copyright
-
-Coding Boot Camp © 2016. All Rights Reserved.
- --> 
